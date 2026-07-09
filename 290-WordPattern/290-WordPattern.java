@@ -1,0 +1,27 @@
+// Last updated: 7/9/2026, 9:12:08 AM
+import java.util.HashMap;
+import java.util.Objects;
+class Solution {
+    public boolean wordPattern(String pattern, String s) {
+        String[] words = s.split(" ");
+        if (words.length != pattern.length()) {
+            return false;
+        }
+        HashMap<Character, String> map = new HashMap<>();
+        for (int i = 0; i < pattern.length(); i++) {
+            char ch = pattern.charAt(i);
+            String word = words[i];
+            if (map.containsKey(ch)) {
+                if (!map.get(ch).equals(word)) {
+                    return false;
+                }
+            } else {
+                if (map.containsValue(word)) {
+                    return false;
+                }
+                map.put(ch, word);
+            }
+        }
+        return true;
+    }
+}
